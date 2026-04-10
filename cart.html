@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Корзина — Мастерская свечей</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="cart">
+
+<header>
+  <h1>Корзина</h1>
+  <nav>
+        <a href="index.html" data-nav="index">Главная</a>
+        <a href="catalog.html" data-nav="catalog">Каталог</a>
+        <a href="reviews.html" data-nav="reviews">Отзывы</a>
+        <a href="contacts.html" data-nav="contacts">Контакты</a>
+        <a href="favorites.html" data-nav="favorites">Избранное ❤️</a>
+        <a href="cart.html" data-nav="cart">Корзина (<span id="cartCount">0</span>)</a>
+    </nav>
+</header>
+
+<main>
+  <div class="container">
+    <div class="btn-row">
+      <button class="btn btn--ghost" id="clearCartBtn">Очистить корзину</button>
+    </div>
+
+    <div id="cartRoot" style="margin-top:16px;"></div>
+  </div>
+</main>
+
+<footer>© 2026 Мастерская свечей</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

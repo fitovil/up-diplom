@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог — Мастерская свечей</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-page="catalog">
+
+<header>
+  <h1>Каталог свечей</h1>
+  <nav>
+        <a href="index.html" data-nav="index">Главная</a>
+        <a href="catalog.html" data-nav="catalog">Каталог</a>
+        <a href="reviews.html" data-nav="reviews">Отзывы</a>
+        <a href="contacts.html" data-nav="contacts">Контакты</a>
+        <a href="favorites.html" data-nav="favorites">Избранное ❤️</a>
+        <a href="cart.html" data-nav="cart">Корзина (<span id="cartCount">0</span>)</a>
+    </nav>
+</header>
+
+<section>
+  <h2 style="text-align:center;">Наши свечи</h2>
+
+  <!-- ПОИСК -->
+  <div style="text-align:center; margin:20px;">
+    <input type="text" id="search" placeholder="Поиск свечей..." style="padding:10px; width:300px;">
+  </div>
+
+  <div class="products">
+
+    <div class="card" data-name="лаванда успокаивающий аромат">
+      <img src="123/photo_2025-09-13_23-12-17.jpg">
+      <h3>Лаванда</h3>
+      <p>Успокаивающий аромат для расслабления.</p>
+      <button class="btn" data-add-to-cart='{"id":"lavanda","title":"Лаванда","desc":"Успокаивающий аромат для расслабления.","img":"123/photo_2025-09-13_23-12-17.jpg"}'>В корзину</button>
+      <button class="fav-btn">❤️</button>
+    </div>
+
+    <div class="card" data-name="ваниль сладкий аромат">
+      <img src="123/photo_2026-03-04_19-53-30.jpg">
+      <h3>Ваниль</h3>
+      <p>Теплый сладкий аромат.</p>
+      <button class="btn" data-add-to-cart='{"id":"vanil","title":"Ваниль","desc":"Теплый сладкий аромат.","img":"123/photo_2026-03-04_19-53-30.jpg"}'>В корзину</button>
+      <button class="fav-btn">❤️</button>
+    </div>
+
+    <div class="card" data-name="пион цветочный свежесть">
+      <img src="123/photo_2025-09-09_16-36-04.jpg">
+      <h3>Пионовое настроение</h3>
+      <p>Свежесть цветущего сада.</p>
+      <button class="btn" data-add-to-cart='{"id":"pion","title":"Пионовое настроение","desc":"Свежесть цветущего сада.","img":"123/photo_2025-09-09_16-36-04.jpg"}'>В корзину</button>
+      <button class="fav-btn">❤️</button>
+    </div>
+
+    <div class="card" data-name="свет минимализм форма">
+      <img src="123/photo_2025-08-19_17-37-02.jpg">
+      <h3>Точка света</h3>
+      <p>Чистая форма света.</p>
+      <button class="btn" data-add-to-cart='{"id":"tochka","title":"Точка света","desc":"Чистая форма света.","img":"123/photo_2025-08-19_17-37-02.jpg"}'>В корзину</button>
+      <button class="fav-btn">❤️</button>
+    </div>
+
+    <div class="card" data-name="уют теплый вечер дом">
+      <img src="123/photo_2025-06-10_21-55-15.jpg">
+      <h3>Тёплый вечер</h3>
+      <p>Мягкий уют дома.</p>
+      <button class="btn" data-add-to-cart='{"id":"teplyi","title":"Тёплый вечер","desc":"Мягкий уют дома.","img":"123/photo_2025-06-10_21-55-15.jpg"}'>В корзину</button>
+      <button class="fav-btn">❤️</button>
+    </div>
+
+    <div class="card" data-name="корица пряный аромат">
+      <img src="123/photo_2025-06-05_17-05-49.jpg">
+      <h3>Корица</h3>
+      <p>Пряный аромат уюта.</p>
+      <button class="btn" data-add-to-cart='{"id":"korica","title":"Корица","desc":"Пряный аромат уюта.","img":"123/photo_2025-06-05_17-05-49.jpg"}'>В корзину</button>
+      <button class="fav-btn">❤️</button>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  © 2026 Мастерская свечей
+</footer>
+
+<script src="app.js"></script>
+
+<script>
+// ПОИСК
+const searchInput = document.getElementById('search');
+const cards = document.querySelectorAll('.card');
+
+searchInput.addEventListener('input', function() {
+  const value = this.value.toLowerCase();
+
+  cards.forEach(card => {
+    const text = card.dataset.name;
+    card.style.display = text.includes(value) ? "block" : "none";
+  });
+});
+
+// ИЗБРАННОЕ
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+document.querySelectorAll('.card').forEach(card => {
+  const btn = card.querySelector('.fav-btn');
+  const title = card.querySelector('h3').innerText;
+  const img = card.querySelector('img').src;
+  const desc = card.querySelector('p').innerText;
+
+  if (favorites.find(item => item.title === title)) {
+    btn.style.color = "red";
+  }
+
+  btn.addEventListener('click', () => {
+    const exists = favorites.find(item => item.title === title);
+
+    if (exists) {
+      favorites = favorites.filter(item => item.title !== title);
+      btn.style.color = "black";
+    } else {
+      favorites.push({ title, img, desc });
+      btn.style.color = "red";
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    updateFavCount();
+  });
+});
+
+function updateFavCount() {
+  document.getElementById('favCount').innerText = favorites.length;
+}
+
+updateFavCount();
+</script>
+
+</body>
+</html>

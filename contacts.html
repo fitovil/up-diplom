@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Контакты — Мастерская свечей</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="contacts">
+
+<header>
+  <h1>Контакты</h1>
+  <nav>
+        <a href="index.html" data-nav="index">Главная</a>
+        <a href="catalog.html" data-nav="catalog">Каталог</a>
+        <a href="reviews.html" data-nav="reviews">Отзывы</a>
+        <a href="contacts.html" data-nav="contacts">Контакты</a>
+        <a href="favorites.html" data-nav="favorites">Избранное ❤️</a>
+        <a href="cart.html" data-nav="cart">Корзина (<span id="cartCount">0</span>)</a>
+    </nav>
+</header>
+
+<main>
+  <div class="container">
+    <div class="form">
+      <p>Мастерская свечей Уральской Красы</p>
+      <p>Город: Екатеринбург</p>
+      <p>Телефон/мессенджер: укажи свой контакт</p>
+      <p>Почта: укажи свою почту</p>
+    </div>
+
+    <div class="form" style="margin-top:16px;">
+      <h2 style="margin-top:0;">Написать сообщение</h2>
+      <p style="opacity:.8;">Учебная версия: отправка на сервер не выполняется.</p>
+
+      <form onsubmit="event.preventDefault(); alert('Сообщение сформировано (без отправки).');">
+        <div class="field">
+          <label>Имя</label>
+          <input required />
+        </div>
+        <div class="field">
+          <label>Сообщение</label>
+          <textarea required></textarea>
+        </div>
+        <button class="btn" type="submit">Отправить</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer>© 2026 Мастерская свечей</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
